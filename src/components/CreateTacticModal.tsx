@@ -153,14 +153,22 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
           {decodedTactic && (
             <div className="bg-gray-800 p-4 rounded-lg mb-6">
+              {console.log('Decoded Tactic:', decodedTactic)}
+              
               <h3 className="text-lg font-semibold mb-4">Decoded Tactic</h3>
               <div className="grid grid-cols-2 gap-6">
                 <FormationDisplay
                   formation={decodedTactic.formation}
                   positionsRolesFocuses={decodedTactic.positionsRolesFocuses}
+                  // Optional: Add logging in FormationDisplay component props
+                  onRender={() => console.log('FormationDisplay rendered with:', decodedTactic.formation)}
                 />
                 <div className="space-y-4">
                   <div>
+                    {console.log('Formation:', decodedTactic.formation)}
+                    {console.log('Build-up Style:', BUILDUP_STYLES[decodedTactic.buildup])}
+                    {console.log('Defensive Approach:', DEFENSIVE_APPROACHES[decodedTactic.defensive])}
+                    
                     <p className="text-gray-400">Formation: <span className="text-white">{decodedTactic.formation}</span></p>
                     <p className="text-gray-400">Build-up Style: <span className="text-white">{BUILDUP_STYLES[decodedTactic.buildup]}</span></p>
                     <p className="text-gray-400">Defensive Approach: <span className="text-white">{DEFENSIVE_APPROACHES[decodedTactic.defensive]}</span></p>

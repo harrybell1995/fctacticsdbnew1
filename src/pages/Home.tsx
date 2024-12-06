@@ -17,19 +17,52 @@ export const Home = () => {
 
   // Example formation data for the hero section
   const heroTactic = {
-    formation: "4-4-2",
+    formation: 16,
     positionsRolesFocuses: {
-  "Player 1": ["Sweeper Keeper", "Support"],
-  "Player 2": ["Full Back", "Support"],
-  "Player 3": ["Central Defender", "Defend"],
-  "Player 4": ["Central Defender", "Defend"],
-  "Player 5": ["Full Back", "Support"],
-  "Player 8": ["Deep Lying Playmaker", "Support"],
-  "Player 7": ["Ball Winning Midfielder", "Support"],
-  "Player 9": ["Wide Midfielder", "Attack"],
-  "Player 6": ["Wide Midfielder", "Attack"],
-  "Player 10": ["Advanced Forward", "Attack"],
-  "Player 11": ["Deep Lying Forward", "Support"]
+      "Player 1": [
+        "Goalkeeper",
+        "Balanced"
+      ],
+      "Player 2": [
+        "Fullback",
+        "Balanced"
+      ],
+      "Player 3": [
+        "Defender",
+        "Balanced"
+      ],
+      "Player 4": [
+        "Defender",
+        "Balanced"
+      ],
+      "Player 5": [
+        "Fullback",
+        "Balanced"
+      ],
+      "Player 6": [
+        "Winger",
+        "Attack"
+      ],
+      "Player 7": [
+        "Box-To-Box",
+        "Balanced"
+      ],
+      "Player 8": [
+        "Deep-Lying Playmaker",
+        "Roaming"
+      ],
+      "Player 9": [
+        "Wide Midfielder",
+        "Balanced"
+      ],
+      "Player 10": [
+        "Advanced Forward",
+        "Complete"
+      ],
+      "Player 11": [
+        "Poacher",
+        "Attack"
+      ]
     }
   };
 
@@ -133,8 +166,12 @@ export const Home = () => {
                   
                   {/* Formation Display */}
                   <div className="aspect-[3/4]">
+                    {/* Log the formation ID */}
+                    {console.log(heroTactic.formation)}
+                    
+                    {/* Pass the formationId and other props to FormationDisplay */}
                     <FormationDisplay
-                      formation={heroTactic.formation}
+                      formationId={heroTactic.formation}
                       positionsRolesFocuses={heroTactic.positionsRolesFocuses}
                     />
                   </div>

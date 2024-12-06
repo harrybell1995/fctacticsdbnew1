@@ -14,7 +14,6 @@ export interface TacticsPlaylist {
 }
 
 export interface Formation {
-  formation: string;
   id: string;
 }
 
@@ -23,7 +22,7 @@ export interface Tactic {
   created_at: string;
   tactic_name: string;
   description: string;
-  formation: Formation;
+  formation_id: Formation;
   positions_roles_focuses: Record<string, [string, string]>;
   build_up_style: string;
   defensive_approach: string;
