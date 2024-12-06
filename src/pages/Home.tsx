@@ -160,8 +160,8 @@ export const Home = () => {
                 {/* Tactics Card */}
                 <div className="relative bg-gray-900/90 rounded-2xl p-6 backdrop-blur-sm border border-white/10 shadow-2xl">
                   <div className="mb-4">
-                    <h3 className="text-xl font-bold text-white">Total Football</h3>
-                    <p className="text-sm text-gray-400">Ajax 1974</p>
+                    <h3 className="text-xl font-bold text-white">Fergie's Treble Winners</h3>
+                    <p className="text-sm text-gray-400">Manchester United '99</p>
                   </div>
                   
                   {/* Formation Display */}

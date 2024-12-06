@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { X, Search } from 'lucide-react';
-import { FormationDisplay } from './FormationDisplay';
-import { decodeShareCode, decodePlayerRole, getFormationName, getFormationPositions } from '../utils/shareCodeDecoder';
+import { supabase } from '../lib/supabase'; // Adjust path as needed
+import { 
+  decodeShareCode, 
+  decodePlayerRole, 
+  getFormationName, 
+  getFormationPositions 
+} from '../utils/shareCodeDecoder';
 import { clubs, leagues } from '../utils/clubData';
+import { ROLES } from '../utils/constants';
 
+// Interfaces for type safety
 interface Position {
   id: string;
   role: string;
@@ -30,10 +37,46 @@ interface Props {
   onClose: () => void;
 }
 
+// Constants for dropdown options
 const BUILDUP_STYLES = ['Balanced', 'Counter', 'Short Passing'];
 const DEFENSIVE_APPROACHES = ['Deep', 'Normal', 'High', 'Aggressive'];
 
+export function decodeShareCodeToPlayerRoles(shareCode: string): Record<string, [string, string]> {
+  const decodedTactics = decodeShareCode(shareCode);
+  if (!decodedTactics) return {};
+
+  const formationPositions = getFormationPositions(decodedTactics.formation);
+
+  const playerRoles = decodedTactics.instructions.map((instruction, index) => {
+    const positionGroup = formationPositions[index];
+    const roleName = decodePlayerRole(instruction, positionGroup);
+    
+    const roleTypes: Record<string, string> = {
+      'Defend': 'Defend',
+      'Support': 'Balanced',
+      'Attack': 'Wide'
+    };
+
+    const positionKey = Object.keys(ROLES).find(key => 
+      ROLES[key as keyof typeof ROLES].some(role => role.name.toLowerCase() === roleName.toLowerCase())
+    );
+
+    const roleType = positionKey 
+      ? ROLES[positionKey as keyof typeof ROLES].find(
+          role => role.name.toLowerCase() === roleName.toLowerCase()
+        )?.type 
+      : 'Support';
+
+    const finalRoleType = roleTypes[roleType || 'Support'] || 'Balanced';
+
+    return { [`Player ${index + 1}`]: [roleName, finalRoleType] };
+  });
+
+  return Object.assign({}, ...playerRoles);
+}
+
 export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
+  // Initial form state
   const [formData, setFormData] = useState<TacticFormData>({
     tacticname: '',
     manager: '',
@@ -47,11 +90,14 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
     shareCode: ''
   });
 
+  // State for decoded tactic, errors, and UI interactions
   const [decodedTactic, setDecodedTactic] = useState<any>(null);
   const [error, setError] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [showClubSuggestions, setShowClubSuggestions] = useState(false);
   const [filteredClubs, setFilteredClubs] = useState(clubs);
 
+  // Handle share code input and decoding
   const handleShareCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const code = e.target.value;
     setFormData(prev => ({ ...prev, shareCode: code }));
@@ -89,6 +135,7 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
     }
   };
 
+  // Handle club input and suggestions
   const handleClubChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setFormData(prev => ({ ...prev, club: value }));
@@ -100,6 +147,7 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
     setShowClubSuggestions(true);
   };
 
+  // Select a club from suggestions
   const selectClub = (club: typeof clubs[0]) => {
     setFormData(prev => ({
       ...prev,
@@ -110,21 +158,99 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
     setShowClubSuggestions(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Submit form to Supabase
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate share code
     if (!formData.shareCode || formData.shareCode.length !== 11) {
       setError('Share code is required and must be 11 characters');
       return;
     }
-    console.log(formData);
-    onClose();
+
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      // Insert tactic into Supabase
+      const { data, error } = await supabase
+      .from('tacticsTable')
+      .insert({
+        tactic_name: formData.tacticname,
+        manager_name: formData.manager,
+        year: formData.year,
+        club: formData.club,
+        club_country: formData.clubcountry,
+        league: formData.league,
+        description: formData.notes,
+        share_code: formData.shareCode,
+        
+        // Optional: Store decoded tactic details
+        formation_id: decodedTactic?.formation,
+        build_up_style: decodedTactic ? BUILDUP_STYLES[decodedTactic.buildup] : null,
+        defensive_approach: decodedTactic ? DEFENSIVE_APPROACHES[decodedTactic.defensive] : null
+      });
+    
+    if (error) {
+      console.error('Supabase insertion error:', error);
+      throw error;
+    }
+    
+      // Reset form and close modal
+      setFormData({
+        tacticname: '',
+        manager: '',
+        year: new Date().getFullYear().toString(),
+        club: '',
+        clubcountry: '',
+        league: '',
+        buildupstyle: 'Balanced',
+        defensiveapproach: 'Normal',
+        notes: '',
+        shareCode: ''
+      });
+      
+      onClose(); // Close the modal
+    } catch (err) {
+      // Handle submission errors
+      setError(err instanceof Error ? err.message : 'An error occurred while submitting the tactic');
+      console.error('Supabase insertion error:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
+  // Render submit button with loading state
+  const renderSubmitButton = () => {
+    if (isSubmitting) {
+      return (
+        <button 
+          type="submit" 
+          disabled 
+          className="px-4 py-2 bg-green-500 text-white rounded-md opacity-50 cursor-not-allowed"
+        >
+          Creating Tactic...
+        </button>
+      );
+    }
+
+    return (
+      <button
+        type="submit"
+        className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
+      >
+        Create Tactic
+      </button>
+    );
+  };
+
+  // If modal is not open, return null
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
       <div className="bg-gray-900 rounded-lg w-full max-w-6xl max-h-[90vh] overflow-y-auto">
+        {/* Modal Header */}
         <div className="sticky top-0 bg-gray-900 p-6 border-b border-gray-800 flex justify-between items-center">
           <h2 className="text-2xl font-bold">Create New Tactic</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-white">
@@ -132,6 +258,7 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
           </button>
         </div>
         
+        {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Share Code Input */}
           <div className="mb-6">
@@ -151,24 +278,13 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
             {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
           </div>
 
+          {/* Decoded Tactic Display */}
           {decodedTactic && (
             <div className="bg-gray-800 p-4 rounded-lg mb-6">
-              {console.log('Decoded Tactic:', decodedTactic)}
-              
               <h3 className="text-lg font-semibold mb-4">Decoded Tactic</h3>
               <div className="grid grid-cols-2 gap-6">
-                <FormationDisplay
-                  formation={decodedTactic.formation}
-                  positionsRolesFocuses={decodedTactic.positionsRolesFocuses}
-                  // Optional: Add logging in FormationDisplay component props
-                  onRender={() => console.log('FormationDisplay rendered with:', decodedTactic.formation)}
-                />
                 <div className="space-y-4">
                   <div>
-                    {console.log('Formation:', decodedTactic.formation)}
-                    {console.log('Build-up Style:', BUILDUP_STYLES[decodedTactic.buildup])}
-                    {console.log('Defensive Approach:', DEFENSIVE_APPROACHES[decodedTactic.defensive])}
-                    
                     <p className="text-gray-400">Formation: <span className="text-white">{decodedTactic.formation}</span></p>
                     <p className="text-gray-400">Build-up Style: <span className="text-white">{BUILDUP_STYLES[decodedTactic.buildup]}</span></p>
                     <p className="text-gray-400">Defensive Approach: <span className="text-white">{DEFENSIVE_APPROACHES[decodedTactic.defensive]}</span></p>
@@ -178,7 +294,9 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
             </div>
           )}
 
+          {/* Form Fields */}
           <div className="grid grid-cols-2 gap-6">
+            {/* Tactic Name */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Tactic Name *
@@ -193,6 +311,7 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
               />
             </div>
 
+            {/* Manager Name */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Manager Name *
@@ -207,6 +326,7 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
               />
             </div>
 
+            {/* Club Input with Suggestions */}
             <div className="relative">
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Club *
@@ -240,6 +360,7 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
               )}
             </div>
 
+            {/* League Input */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 League *
@@ -260,6 +381,7 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
               </datalist>
             </div>
 
+            {/* Year Input */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Year *
@@ -296,12 +418,7 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
             >
               Cancel
             </button>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
-            >
-              Create Tactic
-            </button>
+            {renderSubmitButton()}
           </div>
         </form>
       </div>
