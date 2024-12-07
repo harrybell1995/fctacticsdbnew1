@@ -34,6 +34,40 @@ export const PlayerPositionGroup = {
   ST: 8
 } as const;
 
+export const TACTIC_TAGS = {
+  HIGH_PRESS: 'High Press',
+  LOW_BLOCK: 'Low Block',
+  COUNTER_PRESS: 'Counter Press',
+  WIDE_PLAY: 'Wide Play',
+  NARROW_PLAY: 'Narrow Play',
+  DIRECT_PLAY: 'Direct Play',
+  BUILD_FROM_BACK: 'Build from the Back',
+  FAST_TRANSITIONS: 'Fast Transitions',
+  POSSESSION_BASED: 'Possession-Based',
+  COUNTER_ATTACK: 'Counter Attack',
+  LONG_BALL: 'Long Ball',
+  HIGH_LINE: 'High Line',
+  DEFENSIVE_BLOCK: 'Defensive Block',
+  OVERLAPPING_FULLBACKS: 'Overlapping Fullbacks',
+  INVERTED_WINGERS: 'Inverted Wingers',
+  FALSE_NINE: 'False Nine',
+  BALL_RECOVERY: 'Ball Recovery',
+  QUICK_PASSING: 'Quick Passing',
+  SHORT_PASSING: 'Short Passing',
+  FLUID_MOVEMENT: 'Fluid Movement',
+  WING_PLAY: 'Wing Play',
+  VERTICALITY: 'Verticality',
+  MAN_MARKING: 'Man Marking',
+  ZONAL_MARKING: 'Zonal Marking',
+  PRESSING_TRAP: 'Pressing Trap',
+  OFFSIDE_TRAP: 'Offside Trap',
+  TIKI_TAKA: 'Tiki-Taka',
+  COMPACT_DEFENSE: 'Compact Defense',
+  SET_PIECES_FOCUS: 'Set Pieces Focus',
+  ATTACKING_WIDTH: 'Attacking Width'
+} as const;
+
+
 // Player roles by position
 export const ROLES = {
   gk: [

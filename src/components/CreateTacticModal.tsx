@@ -8,7 +8,7 @@ import {
   getFormationPositions 
 } from '../utils/shareCodeDecoder';
 import { clubs, leagues } from '../utils/clubData';
-import { ROLES } from '../utils/constants';
+import { ROLES, TACTIC_TAGS } from '../utils/constants';
 
 // Interfaces for type safety
 interface Position {
@@ -30,6 +30,10 @@ interface TacticFormData {
   defensiveapproach: string;
   notes: string;
   shareCode: string;
+  tacticTags: string[]; 
+  positions_focuses_roles: string[]; 
+  verified: string;
+  formation_id: string[]; 
 }
 
 interface Props {
@@ -40,6 +44,13 @@ interface Props {
 // Constants for dropdown options
 const BUILDUP_STYLES = ['Balanced', 'Counter', 'Short Passing'];
 const DEFENSIVE_APPROACHES = ['Deep', 'Normal', 'High', 'Aggressive'];
+
+interface TacticTagsSelectorProps {
+  formData: {
+    tacticTags?: string[];
+  };
+  setFormData: React.Dispatch<React.SetStateAction<any>>;
+}
 
 export function decodeShareCodeToPlayerRoles(shareCode: string): Record<string, [string, string]> {
   const decodedTactics = decodeShareCode(shareCode);
@@ -87,8 +98,40 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
     buildupstyle: 'Balanced',
     defensiveapproach: 'Normal',
     notes: '',
-    shareCode: ''
+    shareCode: '',
+    tacticTags: [],
+    formation_id: [],
+    positions_focuses_roles: [],
+    verified: 'FALSE'
   });
+
+  const handleTagSelection = (tag: string) => {
+    setFormData((prev) => {
+      const currentTags = prev.tacticTags || [];
+      
+      // If tag is already selected, remove it
+      if (currentTags.includes(tag)) {
+        return {
+          ...prev,
+          tacticTags: currentTags.filter(t => t !== tag)
+        };
+      }
+      
+      // If less than 3 tags are selected, add the tag
+      if (currentTags.length < 3) {
+        return {
+          ...prev,
+          tacticTags: [...currentTags, tag]
+        };
+      }
+      
+      // If 3 tags are already selected, replace the first tag
+      return {
+        ...prev,
+        tacticTags: [tag, ...currentTags.slice(1)]
+      };
+    });
+  };
 
   // State for decoded tactic, errors, and UI interactions
   const [decodedTactic, setDecodedTactic] = useState<any>(null);
@@ -106,7 +149,7 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
       try {
         const decoded = decodeShareCode(code);
         if (decoded) {
-          const formationName = getFormationName(decoded.formation);
+          const formationId = decoded.formation;
           const positions = getFormationPositions(decoded.formation);
           
           const positionsRolesFocuses: Record<string, [string, string]> = {};
@@ -118,7 +161,7 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
           });
 
           setDecodedTactic({
-            formation: formationName,
+            formation: formationId,
             buildup: decoded.buildup,
             defensive: decoded.defensive,
             positionsRolesFocuses
@@ -167,10 +210,18 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
       setError('Share code is required and must be 11 characters');
       return;
     }
-
+  
+    // Validate tactic tags (exactly 3 required)
+    if (!formData.tacticTags || formData.tacticTags.length !== 3) {
+      setError('Please select exactly 3 tactic tags');
+      return;
+    }
+  
     setIsSubmitting(true);
     setError('');
-
+    console.log("yoooo the decoded tactic.formation is " + decodedTactic?.formation)
+    console.log('"id": "' + decodedTactic?.formation + '}')
+    const finalformationid = { id: decodedTactic?.formation };
     try {
       // Insert tactic into Supabase
       const { data, error } = await supabase
@@ -184,18 +235,20 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
         league: formData.league,
         description: formData.notes,
         share_code: formData.shareCode,
-        
+        tags: formData.tacticTags,         
         // Optional: Store decoded tactic details
-        formation_id: decodedTactic?.formation,
+        formation_id: finalformationid,
         build_up_style: decodedTactic ? BUILDUP_STYLES[decodedTactic.buildup] : null,
-        defensive_approach: decodedTactic ? DEFENSIVE_APPROACHES[decodedTactic.defensive] : null
+        defensive_approach: decodedTactic ? DEFENSIVE_APPROACHES[decodedTactic.defensive] : null,
+        positions_focuses_roles: decodedTactic ? decodedTactic.positionsRolesFocuses : null,
+        verified: 'FALSE',
       });
-    
-    if (error) {
-      console.error('Supabase insertion error:', error);
-      throw error;
-    }
-    
+  
+      if (error) {
+        console.error('Supabase insertion error:', error);
+        throw error;
+      }
+      
       // Reset form and close modal
       setFormData({
         tacticname: '',
@@ -207,7 +260,11 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
         buildupstyle: 'Balanced',
         defensiveapproach: 'Normal',
         notes: '',
-        shareCode: ''
+        shareCode: '',
+        tacticTags: [], // Reset tactic tags
+        positions_focuses_roles: [],
+        verified: 'FALSE',
+        formation_id: [],
       });
       
       onClose(); // Close the modal
@@ -219,7 +276,6 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
       setIsSubmitting(false);
     }
   };
-
   // Render submit button with loading state
   const renderSubmitButton = () => {
     if (isSubmitting) {
@@ -325,6 +381,35 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 required
               />
             </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                Tactic Tags (Select 3) *
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                {Object.values(TACTIC_TAGS).map((tag) => (
+                  <button
+                    key={tag}
+                    type="button"
+                    onClick={() => handleTagSelection(tag)}
+                    className={`
+                      px-3 py-2 rounded-md text-sm 
+                      ${formData.tacticTags?.includes(tag) 
+                        ? 'bg-blue-600 text-white' 
+                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700'}
+                    `}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+              {formData.tacticTags && (
+                <div className="mt-2 text-sm text-gray-400">
+                  Selected Tags: {formData.tacticTags.join(', ')}
+                </div>
+              )}
+            </div>
+
 
             {/* Club Input with Suggestions */}
             <div className="relative">

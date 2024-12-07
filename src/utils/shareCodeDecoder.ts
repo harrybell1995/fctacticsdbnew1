@@ -1,5 +1,6 @@
 import { SHARE_CODE_LENGTH, shareCodeTable, offsets, FormationPositions, PlayerPositionGroup, ROLES } from './constants';
 
+
 function getNumberFromCode(t: string, e: number, i: number): number {
   let r = 0;
   if (t === '&') t = '0';
@@ -67,6 +68,8 @@ export function decodeShareCode(shareCode: string): DecodedTactics | null {
   const c = BigInt.asUintN(32, i) & BigInt(r.formationIDMask);
   i >>= r.formationIDBitLength;
   const formation = Number(c);
+
+  console.log("formation in decode is" + formation)
 
   // Extract player roles
   const instructions: number[] = [];
