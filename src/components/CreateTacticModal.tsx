@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import { X, Search } from 'lucide-react';
 import { supabase } from '../lib/supabase'; // Adjust path as needed
-import { 
-  decodeShareCode, 
-  decodePlayerRole, 
-  getFormationName, 
-  getFormationPositions 
-} from '../utils/shareCodeDecoder';
+import { decodeShareCode,   decodePlayerRole,   getFormationName,   getFormationPositions } from '../utils/shareCodeDecoder';
 import { clubs, leagues } from '../utils/clubData';
 import { ROLES, TACTIC_TAGS } from '../utils/constants';
 
@@ -219,8 +214,6 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
   
     setIsSubmitting(true);
     setError('');
-    console.log("yoooo the decoded tactic.formation is " + decodedTactic?.formation)
-    console.log('"id": "' + decodedTactic?.formation + '}')
     const finalformationid = { id: decodedTactic?.formation };
     try {
       // Insert tactic into Supabase
@@ -340,7 +333,7 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
               <h3 className="text-lg font-semibold mb-4">Decoded Tactic</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <p className="text-gray-400">Formation: <span className="text-white">{decodedTactic.formation}</span></p>
+                  <p className="text-gray-400">Formation: <span className="text-white">{getFormationName(decodedTactic.formation)}</span></p>
                   <p className="text-gray-400">Build-up Style: <span className="text-white">{BUILDUP_STYLES[decodedTactic.buildup]}</span></p>
                   <p className="text-gray-400">Defensive Approach: <span className="text-white">{DEFENSIVE_APPROACHES[decodedTactic.defensive]}</span></p>
                 </div>
