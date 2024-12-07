@@ -8,6 +8,7 @@ const formationMapping: Record<string, string> = {
   '16': '4-4-2',      // ID '16' corresponds to '4-4-2'
   '24': '3-4-2-1',    // ID '24' corresponds to '3-4-2-1'
   '23': '3-4-1-2',    // ID '23' corresponds to '3-4-1-2'
+  '22': '3-1-4-2',    // ID '22' corresponds to '3-1-4-2'
   '25': '3-4-3',      // ID '25' corresponds to '3-4-3'
   '27': '3-5-2',      // ID '27' corresponds to '3-5-2'
   '33': '5-4-1',      // ID '33' corresponds to '5-4-1'
@@ -44,65 +45,65 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
   // You can replace this logic with actual formation coordinates
   const formationCoords: Record<string, { x: number; y: number }[]> = {
     '3-1-4-2': [
-      { x: 50, y: 5 },   // GK
-      { x: 30, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 70, y: 20 },  // CB
-      { x: 50, y: 45 },  // CDM
-      { x: 20, y: 45 },  // LM
-      { x: 80, y: 45 },  // CM
-      { x: 30, y: 70 },  // CM
-      { x: 50, y: 70 },  // RM
-      { x: 40, y: 70 },  // ST
-      { x: 60, y: 70 },  // ST
+      { x: 50, y: 5 },    // GK
+      { x: 30, y: 20 },   // CB
+      { x: 50, y: 20 },   // CB
+      { x: 70, y: 20 },   // CB
+      { x: 50, y: 40 },   // CDM
+      { x: 20, y: 55 },   // LM
+      { x: 40, y: 50 },   // CM
+      { x: 60, y: 50 },   // CM
+      { x: 80, y: 55 },   // RM
+      { x: 40, y: 75 },   // ST
+      { x: 60, y: 75 },   // ST
     ],
     '3-4-1-2': [
-      { x: 50, y: 5 },   // GK
-      { x: 30, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 70, y: 20 },  // CB
-      { x: 20, y: 45 },  // LM
-      { x: 80, y: 45 },  // CM
-      { x: 30, y: 70 },  // CM
-      { x: 50, y: 70 },  // RM
-      { x: 50, y: 45 },  // CAM
-      { x: 40, y: 70 },  // ST
-      { x: 60, y: 70 },  // ST
+      { x: 50, y: 5 },    // GK
+      { x: 30, y: 20 },   // CB
+      { x: 50, y: 20 },   // CB
+      { x: 70, y: 20 },   // CB
+      { x: 20, y: 55 },   // LM
+      { x: 40, y: 50 },   // CM
+      { x: 60, y: 50 },   // CM
+      { x: 80, y: 55 },   // RM
+      { x: 50, y: 60 },   // CAM
+      { x: 40, y: 75 },   // ST
+      { x: 60, y: 75 },   // ST
     ],
     '3-4-2-1': [
-      { x: 50, y: 5 },   // GK
-      { x: 30, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 70, y: 20 },  // CB
-      { x: 20, y: 45 },  // LM
-      { x: 40, y: 45 },  // CM
-      { x: 60, y: 45 },  // CM
-      { x: 80, y: 45 },  // RM
-      { x: 30, y: 60 },  // LCAM
-      { x: 50, y: 60 },  // ST
-      { x: 70, y: 60 },  // RCAM
+      { x: 50, y: 5 },    // GK
+      { x: 30, y: 20 },   // CB
+      { x: 50, y: 20 },   // CB
+      { x: 70, y: 20 },   // CB
+      { x: 20, y: 55 },   // LM
+      { x: 40, y: 50 },   // CM
+      { x: 60, y: 50 },   // CM
+      { x: 80, y: 55 },   // RM
+      { x: 30, y: 65 },   // LCAM
+      { x: 50, y: 75 },   // ST
+      { x: 70, y: 65 },   // RCAM
     ],
     '3-4-3': [
-      { x: 50, y: 5 },   // GK
-      { x: 30, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 70, y: 20 },  // CB
-      { x: 20, y: 45 },  // LM
-      { x: 40, y: 45 },  // CM
-      { x: 60, y: 45 },  // CM
-      { x: 80, y: 45 },  // RM
-      { x: 30, y: 70 },  // LW
-      { x: 50, y: 70 },  // ST
-      { x: 70, y: 70 },  // RW
+      { x: 50, y: 5 },    // GK
+      { x: 30, y: 20 },   // CB
+      { x: 50, y: 20 },   // CB
+      { x: 70, y: 20 },   // CB
+      { x: 20, y: 55 },   // LM
+      { x: 40, y: 50 },   // CM
+      { x: 60, y: 50 },   // CM
+      { x: 80, y: 55 },  // RM
+      { x: 30, y: 75 },   // LW
+      { x: 50, y: 75 },   // ST
+      { x: 70, y: 75 },   // RW
     ],
-    '3-4-3 Diamond': [
+      '3-4-3 Diamond': [
       { x: 50, y: 5 },   // GK
       { x: 30, y: 20 },  // CB
       { x: 50, y: 20 },  // CB
       { x: 70, y: 20 },  // CB
       { x: 50, y: 45 },  // CDM
       { x: 20, y: 45 },  // LM
-      { x: 80, y: 45 },  // RM
+      { x: 80, y: 55 },  // RM
       { x: 50, y: 60 },  // CAM
       { x: 30, y: 75 },  // LW
       { x: 50, y: 70 },  // ST
@@ -116,7 +117,7 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 20, y: 45 },  // LM
       { x: 40, y: 45 },  // CM
       { x: 60, y: 45 },  // CM
-      { x: 80, y: 45 },  // RM
+      { x: 80, y: 55 },  // RM
       { x: 30, y: 75 },  // LW
       { x: 50, y: 70 },  // ST
       { x: 70, y: 75 },  // RW
@@ -130,7 +131,7 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 40, y: 45 },  // CM
       { x: 50, y: 45 },  // CM
       { x: 60, y: 45 },  // CM
-      { x: 80, y: 45 },  // RM
+      { x: 80, y: 55 },  // RM
       { x: 50, y: 60 },  // CAM
       { x: 50, y: 70 },  // ST
     ],
@@ -143,29 +144,29 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 40, y: 45 },  // CM
       { x: 50, y: 45 },  // CM
       { x: 60, y: 45 },  // CM
-      { x: 80, y: 45 },  // RM
+      { x: 80, y: 55 },  // RM
       { x: 40, y: 60 },  // ST
       { x: 60, y: 60 },  // ST
     ],
     '4-1-2-1-2': [
-      { x: 50, y: 5 },   // GK
-      { x: 30, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 70, y: 20 },  // RB
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
       { x: 50, y: 45 },  // CDM
       { x: 30, y: 45 },  // LM
-      { x: 70, y: 45 },  // RM
+      { x: 80, y: 55 },  // RM
       { x: 50, y: 60 },  // CAM
       { x: 40, y: 75 },  // ST
       { x: 60, y: 75 },  // ST
     ],
     '4-1-2-1-2 (2)': [
-      { x: 50, y: 5 },   // GK
-      { x: 30, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 70, y: 20 },  // RB
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
       { x: 50, y: 45 },  // CDM
       { x: 35, y: 45 },  // CM
       { x: 65, y: 45 },  // CM
@@ -174,89 +175,89 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 50, y: 75 },  // ST
     ],
     '4-1-3-2': [
-      { x: 50, y: 5 },   // GK
-      { x: 30, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 70, y: 20 },  // RB
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
       { x: 50, y: 45 },  // CDM
       { x: 30, y: 55 },  // LM
       { x: 50, y: 45 },  // CM
-      { x: 70, y: 55 },  // RM
+      { x: 80, y: 55 },  // RM
       { x: 40, y: 75 },  // ST
       { x: 60, y: 75 },  // ST
     ],
     '4-1-4-1': [
-      { x: 50, y: 5 },   // GK
-      { x: 20, y: 30 },  // LB
-      { x: 40, y: 30 },  // CB
-      { x: 60, y: 30 },  // CB
-      { x: 80, y: 30 },  // RB
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
       { x: 50, y: 45 },  // CCM
       { x: 20, y: 60 },  // LM
       { x: 40, y: 55 },  // CM
       { x: 60, y: 55 },  // CM
-      { x: 80, y: 60 },  // RM
+      { x: 80, y: 55 },  // RM
       { x: 50, y: 75 },  // ST
     ],
     '4-2-1-3': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 25, y: 45 },  // CDM
-      { x: 50, y: 55 },  // CDM
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
+      { x: 35, y: 45 },  // CDM
+      { x: 65, y: 45 },  // CDM
       { x: 75, y: 45 },  // CAM
       { x: 25, y: 70 },  // LW
       { x: 50, y: 70 },  // ST
       { x: 75, y: 70 },  // RW
     ],
     '4-2-2-2': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 50, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 25, y: 45 },  // CDM
-      { x: 50, y: 55 },  // CDM
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
+      { x: 35, y: 45 },  // CDM
+      { x: 65, y: 45 },  // CDM
       { x: 75, y: 45 },  // CAM
       { x: 75, y: 45 },  // CAM
       { x: 50, y: 70 },  // ST
       { x: 50, y: 70 },  // ST
     ],
     '4-2-3-1': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 60, y: 20 },  // CB
-      { x: 40, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 40, y: 40 },  // CDM
-      { x: 60, y: 40 },  // CDM
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
+      { x: 40, y: 45 },  // CDM
+      { x: 60, y: 45 },  // CDM
       { x: 75, y: 55 },  // CAM
       { x: 50, y: 55 },  // CAM
       { x: 25, y: 55 },  // CAM
       { x: 50, y: 70 },  // ST
     ],
     '4-2-3-1 (2)': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 60, y: 20 },  // CB
-      { x: 40, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 40, y: 40 },  // CDM
-      { x: 60, y: 40 },  // CDM
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 32 },  // LB
+      { x: 40, y: 30 },  // CB
+      { x: 60, y: 30 },  // CB
+      { x: 75, y: 32 },  // RB
+      { x: 40, y: 45 },  // CDM
+      { x: 60, y: 45 },  // CDM
       { x: 75, y: 58 },  // CAM
       { x: 50, y: 55 },  // CAM
       { x: 25, y: 58},  // CAM
       { x: 50, y: 70 },  // ST
     ],
     '4-2-4': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 50, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
       { x: 25, y: 45 },  // CM
       { x: 50, y: 55 },  // CM
       { x: 75, y: 45 },  // LW
@@ -265,11 +266,11 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 75, y: 45 },  // RW
     ],
     '4-3-1-2': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 50, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
       { x: 25, y: 45 },  // CM
       { x: 25, y: 45 },  // CM
       { x: 25, y: 45 },  // CM
@@ -278,11 +279,11 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 50, y: 70 },  // ST
     ],
     '4-3-2-1': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 50, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
       { x: 25, y: 45 },  // CM
       { x: 25, y: 45 },  // CM
       { x: 25, y: 45 },  // CM
@@ -291,11 +292,11 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 50, y: 70 },  // ST
     ],
     '4-3-3': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
       { x: 25, y: 45 },  // CM
       { x: 50, y: 45 },  // CM
       { x: 75, y: 45 },  // CM
@@ -304,12 +305,12 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 75, y: 70 },  // RW
     ],
     '4-3-3 (2)': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 25, y: 45 },  // CDM
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
+      { x: 50, y: 45 },  // CDM
       { x: 50, y: 45 },  // CM
       { x: 75, y: 45 },  // CM
       { x: 25, y: 70 },  // LW
@@ -317,24 +318,24 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 75, y: 70 },  // RW
     ],
     '4-3-3 (3)': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 25, y: 45 },  // CDM
-      { x: 50, y: 45 },  // CDM
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
+      { x: 35, y: 45 },  // CDM
+      { x: 65, y: 45 },  // CDM
       { x: 75, y: 45 },  // CM
       { x: 25, y: 70 },  // LW
       { x: 50, y: 70 },  // ST
       { x: 75, y: 70 },  // RW
     ],
     '4-3-3 (4)': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
       { x: 25, y: 45 },  // CM
       { x: 50, y: 45 },  // CM
       { x: 75, y: 45 },  // CAM
@@ -343,11 +344,11 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 75, y: 70 },  // RW
     ],
     '4-4-1-1': [
-      { x: 50, y: 5 },   // GK
-      { x: 20, y: 30 },  // LB
-      { x: 40, y: 30 },  // CB
-      { x: 60, y: 30 },  // CB
-      { x: 80, y: 30 },  // RB
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
       { x: 20, y: 55 },  // LM
       { x: 40, y: 50 },  // CM
       { x: 60, y: 50 },  // CM
@@ -356,24 +357,24 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 50, y: 75 },  // ST
     ],
     '4-4-1-1 (2)': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 50, y: 45 },  // CDM
-      { x: 75, y: 45 },  // CDM
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
+      { x: 35, y: 45 },  // CDM
+      { x: 65, y: 45 },  // CDM
       { x: 25, y: 45 },  // LM
-      { x: 25, y: 70 },  // RM
+      { x: 80, y: 55 },  // RM
       { x: 50, y: 70 },  // CAM
       { x: 75, y: 70 },  // ST
     ],
     '4-4-2': [
-      { x: 50, y: 5 },   // GK
-      { x: 20, y: 30 },  // LB
-      { x: 40, y: 30 },  // CB
-      { x: 60, y: 30 },  // CB
-      { x: 80, y: 30 },  // RB
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
       { x: 20, y: 55 },  // LM
       { x: 40, y: 50 },  // CM
       { x: 60, y: 50 },  // CM
@@ -382,57 +383,61 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 60, y: 75 },  // ST
     ],
     '4-4-2 (2)': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
       { x: 50, y: 45 },  // CDM
       { x: 50, y: 45 },  // CDM
-      { x: 50, y: 45 },  // RM
-      { x: 50, y: 45 },  // LM
-      { x: 50, y: 70 },  // ST
-      { x: 50, y: 70 },  // ST
+      { x: 20, y: 55 },  // LM
+      { x: 80, y: 55 },  // RM
+      { x: 40, y: 75 },  // ST
+      { x: 60, y: 75 },  // ST
     ], //where i've left correcting 06.12
     '4-5-1': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 50, y: 45 },  // CM
-      { x: 50, y: 70 },  // CAM
-      { x: 25, y: 75 },  // LW
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
+      { x: 20, y: 55 },  // LM
+      { x: 50, y: 50 },  // CM
+      { x: 80, y: 55 },  // RM
+      { x: 60, y: 70 },  // CAM
+      { x: 80, y: 70 },  // CAM
       { x: 75, y: 75 },  // RW
     ],
     '4-5-1 (2)': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 50, y: 45 },  // CM
-      { x: 50, y: 70 },  // CAM
-      { x: 25, y: 75 },  // LW
-      { x: 75, y: 75 },  // RW
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
+      { x: 20, y: 55 },  // LM
+      { x: 35, y: 50 },  // CM
+      { x: 50, y: 50 },  // CM
+      { x: 65, y: 50 },  // CM
+      { x: 80, y: 55 },  // RM
+      { x: 50, y: 75 },  // ST
     ],
     '4-5-1 Attack': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
       { x: 50, y: 45 },  // CM
       { x: 50, y: 70 },  // CAM
       { x: 25, y: 75 },  // LW
       { x: 75, y: 75 },  // RW
     ],
     '4-5-1 Flat': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
+      { x: 50, y: 10 },   // GK
+      { x: 20, y: 35 },  // LB
+      { x: 40, y: 35 },  // CB
+      { x: 60, y: 35 },  // CB
+      { x: 80, y: 35 },  // RB
       { x: 50, y: 45 },  // CM
       { x: 50, y: 70 },  // CAM
       { x: 25, y: 75 },  // LW

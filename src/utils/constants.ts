@@ -195,6 +195,13 @@ export const FormationPositions = {
     PlayerPositionGroup.AM,
     PlayerPositionGroup.ST, PlayerPositionGroup.ST
   ],
+  22: [ // 3-1-4-2
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.CB,
+    PlayerPositionGroup.DM,
+    PlayerPositionGroup.WM, PlayerPositionGroup.CM, PlayerPositionGroup.CM, PlayerPositionGroup.WM,
+    PlayerPositionGroup.ST, PlayerPositionGroup.ST
+  ],
   27: [ // 3-5-2
     PlayerPositionGroup.GK,
     PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.CB,
