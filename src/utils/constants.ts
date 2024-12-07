@@ -161,7 +161,7 @@ export const ROLES = {
 
 // Formation positions
 export const FormationPositions = {
-  16: [ // 4-4-2
+16: [ // 4-4-2
     PlayerPositionGroup.GK,
     PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
     PlayerPositionGroup.WM, PlayerPositionGroup.CM, PlayerPositionGroup.CM, PlayerPositionGroup.WM,
@@ -179,7 +179,7 @@ export const FormationPositions = {
     PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
     PlayerPositionGroup.DM, PlayerPositionGroup.DM,
     PlayerPositionGroup.AM,
-    PlayerPositionGroup.WM, PlayerPositionGroup.ST, PlayerPositionGroup.WM
+    PlayerPositionGroup.WG, PlayerPositionGroup.ST, PlayerPositionGroup.WG
   ],
   24: [ // 3-4-2-1
     PlayerPositionGroup.GK,
@@ -207,5 +207,145 @@ export const FormationPositions = {
     PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.CB,
     PlayerPositionGroup.WM, PlayerPositionGroup.CM, PlayerPositionGroup.CM, PlayerPositionGroup.WM,
     PlayerPositionGroup.WG, PlayerPositionGroup.ST, PlayerPositionGroup.WG
-  ]
+  ],
+  33: [ // 5-4-1
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.WM, PlayerPositionGroup.CM, PlayerPositionGroup.CM, PlayerPositionGroup.WM,
+    PlayerPositionGroup.ST
+  ],
+  31: [ // 5-3-2
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.CM, PlayerPositionGroup.CM, PlayerPositionGroup.CM,
+    PlayerPositionGroup.ST, PlayerPositionGroup.ST
+  ],
+  30: [ // 5-2-3
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.CM, PlayerPositionGroup.CM,
+    PlayerPositionGroup.WG, PlayerPositionGroup.ST, PlayerPositionGroup.WG
+  ],
+  29: [ // 5-2-1-2
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.CM, PlayerPositionGroup.CM,
+    PlayerPositionGroup.AM,
+    PlayerPositionGroup.ST, PlayerPositionGroup.ST
+  ],
+  20: [ // 4-5-1 (2)
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.WM, PlayerPositionGroup.CM, PlayerPositionGroup.CM, PlayerPositionGroup.CM, PlayerPositionGroup.WM,
+    PlayerPositionGroup.ST
+  ],
+  21: [ // 4-5-1
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.WM, PlayerPositionGroup.CM, PlayerPositionGroup.WM,
+    PlayerPositionGroup.AM, PlayerPositionGroup.AM,
+    PlayerPositionGroup.ST
+  ],
+  17: [ // 4-4-2 (2)
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.DM, PlayerPositionGroup.DM,
+    PlayerPositionGroup.WM, PlayerPositionGroup.WM,
+    PlayerPositionGroup.ST, PlayerPositionGroup.ST
+  ],
+  18: [ // 4-4-1-1
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.WM, PlayerPositionGroup.CM, PlayerPositionGroup.CM, PlayerPositionGroup.WM,
+    PlayerPositionGroup.AM,
+    PlayerPositionGroup.ST
+  ],
+  11: [ // 4-3-3 (4)
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.CM, PlayerPositionGroup.CM, PlayerPositionGroup.AM,
+    PlayerPositionGroup.WG, PlayerPositionGroup.ST, PlayerPositionGroup.WG
+  ],
+  10: [ // 4-3-3 (3)
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.DM, PlayerPositionGroup.DM, PlayerPositionGroup.CM,
+    PlayerPositionGroup.WG, PlayerPositionGroup.ST, PlayerPositionGroup.WG
+  ],
+  9: [ // 4-3-3 (2)
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.DM, PlayerPositionGroup.CM, PlayerPositionGroup.CM,
+    PlayerPositionGroup.WG, PlayerPositionGroup.ST, PlayerPositionGroup.WG
+  ],
+  8: [ // 4-3-3
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.CM, PlayerPositionGroup.CM, PlayerPositionGroup.CM,
+    PlayerPositionGroup.WG, PlayerPositionGroup.ST, PlayerPositionGroup.WG
+  ],
+  7: [ // 4-3-2-1
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.CM, PlayerPositionGroup.CM, PlayerPositionGroup.CM,
+    PlayerPositionGroup.AM, PlayerPositionGroup.AM,
+    PlayerPositionGroup.ST
+  ],
+  6: [ // 4-3-1-2
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.CM, PlayerPositionGroup.CM, PlayerPositionGroup.CM,
+    PlayerPositionGroup.AM,
+    PlayerPositionGroup.ST, PlayerPositionGroup.ST
+  ],
+  5: [ // 4-2-4
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.CM, PlayerPositionGroup.CM,
+    PlayerPositionGroup.WG, PlayerPositionGroup.ST, PlayerPositionGroup.ST, PlayerPositionGroup.WG
+  ],
+  4: [ // 4-2-3-1 (2)
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.DM, PlayerPositionGroup.DM,
+    PlayerPositionGroup.WM, PlayerPositionGroup.AM, PlayerPositionGroup.WM,
+    PlayerPositionGroup.ST
+  ],
+  3: [ // 4-2-3-1
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.DM, PlayerPositionGroup.DM,
+    PlayerPositionGroup.AM, PlayerPositionGroup.AM, PlayerPositionGroup.AM,
+    PlayerPositionGroup.ST
+  ],
+  13: [ // 4-2-2-2
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.DM, PlayerPositionGroup.DM,
+    PlayerPositionGroup.AM, PlayerPositionGroup.AM,
+    PlayerPositionGroup.ST, PlayerPositionGroup.ST
+  ],
+  15: [ // 4-1-2-1-2 (2)
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.DM,
+    PlayerPositionGroup.CM, PlayerPositionGroup.CM,
+    PlayerPositionGroup.AM,
+    PlayerPositionGroup.ST, PlayerPositionGroup.ST
+  ],
+  14: [ // 4-1-2-1-2
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.DM,
+    PlayerPositionGroup.WM, PlayerPositionGroup.WM,
+    PlayerPositionGroup.AM,
+    PlayerPositionGroup.ST, PlayerPositionGroup.ST
+  ],
+  1: [ // 4-1-3-2
+    PlayerPositionGroup.GK,
+    PlayerPositionGroup.FB, PlayerPositionGroup.CB, PlayerPositionGroup.CB, PlayerPositionGroup.FB,
+    PlayerPositionGroup.DM,
+    PlayerPositionGroup.WM, PlayerPositionGroup.CM, PlayerPositionGroup.WM,
+    PlayerPositionGroup.ST, PlayerPositionGroup.ST
+  ] 
 } as const;
