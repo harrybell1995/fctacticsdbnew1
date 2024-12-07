@@ -305,19 +305,19 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-      <div className="bg-gray-900 rounded-lg w-full max-w-6xl max-h-[90vh] overflow-y-auto">
+      <div className="bg-gray-900 rounded-lg w-full max-w-[90%] sm:max-w-xl md:max-w-4xl lg:max-w-6xl max-h-screen overflow-y-auto">
         {/* Modal Header */}
-        <div className="sticky top-0 bg-gray-900 p-6 border-b border-gray-800 flex justify-between items-center">
-          <h2 className="text-2xl font-bold">Create New Tactic</h2>
+        <div className="sticky top-0 bg-gray-900 p-4 sm:p-6 border-b border-gray-800 flex justify-between items-center">
+          <h2 className="text-xl sm:text-2xl font-bold">Create New Tactic</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-white">
             <X size={24} />
           </button>
         </div>
-        
+  
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 sm:space-y-6">
           {/* Share Code Input */}
-          <div className="mb-6">
+          <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">
               Share Code *
             </label>
@@ -333,25 +333,23 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
             />
             {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
           </div>
-
+  
           {/* Decoded Tactic Display */}
           {decodedTactic && (
-            <div className="bg-gray-800 p-4 rounded-lg mb-6">
+            <div className="bg-gray-800 p-4 rounded-lg">
               <h3 className="text-lg font-semibold mb-4">Decoded Tactic</h3>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <div>
-                    <p className="text-gray-400">Formation: <span className="text-white">{decodedTactic.formation}</span></p>
-                    <p className="text-gray-400">Build-up Style: <span className="text-white">{BUILDUP_STYLES[decodedTactic.buildup]}</span></p>
-                    <p className="text-gray-400">Defensive Approach: <span className="text-white">{DEFENSIVE_APPROACHES[decodedTactic.defensive]}</span></p>
-                  </div>
+                  <p className="text-gray-400">Formation: <span className="text-white">{decodedTactic.formation}</span></p>
+                  <p className="text-gray-400">Build-up Style: <span className="text-white">{BUILDUP_STYLES[decodedTactic.buildup]}</span></p>
+                  <p className="text-gray-400">Defensive Approach: <span className="text-white">{DEFENSIVE_APPROACHES[decodedTactic.defensive]}</span></p>
                 </div>
               </div>
             </div>
           )}
-
+  
           {/* Form Fields */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {/* Tactic Name */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -366,7 +364,7 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 required
               />
             </div>
-
+  
             {/* Manager Name */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -381,36 +379,33 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 required
               />
             </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Tactic Tags (Select 3) *
-              </label>
-              <div className="grid grid-cols-3 gap-2">
-                {Object.values(TACTIC_TAGS).map((tag) => (
-                  <button
-                    key={tag}
-                    type="button"
-                    onClick={() => handleTagSelection(tag)}
-                    className={`
-                      px-3 py-2 rounded-md text-sm 
-                      ${formData.tacticTags?.includes(tag) 
-                        ? 'bg-blue-600 text-white' 
-                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700'}
-                    `}
-                  >
-                    {tag}
-                  </button>
-                ))}
-              </div>
-              {formData.tacticTags && (
-                <div className="mt-2 text-sm text-gray-400">
-                  Selected Tags: {formData.tacticTags.join(', ')}
-                </div>
-              )}
+          </div>
+  
+          {/* Tags Section */}
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Tactic Tags (Select 3) *
+            </label>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {Object.values(TACTIC_TAGS).map((tag) => (
+                <button
+                  key={tag}
+                  type="button"
+                  onClick={() => handleTagSelection(tag)}
+                  className={`px-3 py-2 rounded-md text-sm ${formData.tacticTags?.includes(tag) ? 'bg-green-500 text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700'}`}
+                >
+                  {tag}
+                </button>
+              ))}
             </div>
+            {formData.tacticTags && (
+              <div className="mt-2 text-sm text-gray-400">
+                Selected Tags: {formData.tacticTags.join(', ')}
+              </div>
+            )}
+          </div>
 
-
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             {/* Club Input with Suggestions */}
             <div className="relative">
               <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -464,10 +459,13 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   <option key={league} value={league} />
                 ))}
               </datalist>
-            </div>
+              </div>
+
 
             {/* Year Input */}
-            <div>
+ 
+              {/* Year Input */}
+              <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Year *
               </label>
@@ -480,8 +478,10 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 required
               />
             </div>
-          </div>
+            </div>
 
+
+          {/* Notes */}
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">
               Notes
@@ -494,7 +494,8 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
               className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-4 py-2"
             />
           </div>
-
+  
+          {/* Buttons */}
           <div className="flex justify-end gap-4">
             <button
               type="button"
@@ -509,4 +510,5 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
       </div>
     </div>
   );
+  
 };
