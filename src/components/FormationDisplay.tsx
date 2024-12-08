@@ -449,7 +449,8 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 40, y: 20 },  // CB
       { x: 60, y: 20 },  // CB
       { x: 75, y: 20 },  // RB
-      { x: 50, y: 45 },  // CM
+      { x: 40, y: 50 },  // CM
+      { x: 60, y: 50 },  // CM
       { x: 50, y: 70 },  // CAM
       { x: 25, y: 75 },  // LW
       { x: 75, y: 75 },  // RW
@@ -458,50 +459,61 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 50, y: 5 },   // GK
       { x: 25, y: 20 },  // LB
       { x: 40, y: 20 },  // CB
+      { x: 50, y: 20 },  // CB
       { x: 60, y: 20 },  // CB
       { x: 75, y: 20 },  // RB
-      { x: 50, y: 45 },  // CM
+      { x: 40, y: 50 },  // CM
+      { x: 60, y: 50 },  // CM
       { x: 50, y: 70 },  // CAM
-      { x: 25, y: 75 },  // LW
-      { x: 75, y: 75 },  // RW
+      { x: 40, y: 75 },  // ST
+      { x: 60, y: 75 },  // ST
     ],
     '5-2-2-1': [
       { x: 50, y: 5 },   // GK
       { x: 25, y: 20 },  // LB
       { x: 40, y: 20 },  // CB
+      { x: 50, y: 20 },  // CB
       { x: 60, y: 20 },  // CB
       { x: 75, y: 20 },  // RB
-      { x: 50, y: 45 },  // CM
+      { x: 40, y: 50 },  // CM
+      { x: 60, y: 50 },  // CM
       { x: 50, y: 70 },  // CAM
-      { x: 25, y: 75 },  // LW
-      { x: 75, y: 75 },  // RW
+      { x: 40, y: 75 },  // ST
+      { x: 60, y: 75 },  // ST
     ],
     '5-2-3': [
       { x: 50, y: 5 },   // GK
       { x: 25, y: 20 },  // LB
       { x: 40, y: 20 },  // CB
+      { x: 50, y: 20 },  // CB
       { x: 60, y: 20 },  // CB
       { x: 75, y: 20 },  // RB
-      { x: 50, y: 45 },  // CM
-      { x: 50, y: 70 },  // CAM
+      { x: 40, y: 45 },  // CM
+      { x: 60, y: 45 },  // CM
       { x: 25, y: 75 },  // LW
+      { x: 50, y: 75 },  // ST
+      { x: 60, y: 75 },  // ST
+
       { x: 75, y: 75 },  // RW
     ],
     '5-3-2': [
       { x: 50, y: 5 },   // GK
       { x: 25, y: 20 },  // LB
       { x: 40, y: 20 },  // CB
+      { x: 50, y: 20 },  // CB
       { x: 60, y: 20 },  // CB
       { x: 75, y: 20 },  // RB
+      { x: 40, y: 45 },  // CM
       { x: 50, y: 45 },  // CM
-      { x: 50, y: 70 },  // CAM
-      { x: 25, y: 75 },  // LW
-      { x: 75, y: 75 },  // RW
+      { x: 60, y: 45 },  // CM
+      { x: 40, y: 75 },  // ST
+      { x: 60, y: 75 },  // ST
     ],
     '5-4-1': [
       { x: 50, y: 5 },   // GK
       { x: 25, y: 20 },  // LB
       { x: 40, y: 20 },  // CB
+      { x: 50, y: 20 },  // CB
       { x: 60, y: 20 },  // CB
       { x: 75, y: 20 },  // RB
       { x: 50, y: 45 },  // CM
@@ -513,6 +525,7 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 50, y: 5 },   // GK
       { x: 25, y: 20 },  // LB
       { x: 40, y: 20 },  // CB
+      { x: 50, y: 20 },  // CB
       { x: 60, y: 20 },  // CB
       { x: 75, y: 20 },  // RB
       { x: 50, y: 45 },  // CM
@@ -524,6 +537,7 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
       { x: 50, y: 5 },   // GK
       { x: 25, y: 20 },  // LB
       { x: 40, y: 20 },  // CB
+      { x: 50, y: 20 },  // CB
       { x: 60, y: 20 },  // CB
       { x: 75, y: 20 },  // RB
       { x: 50, y: 45 },  // CM
