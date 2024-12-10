@@ -6,6 +6,7 @@ import { FormationDisplay } from '../components/FormationDisplay';
 import { CreateTacticModal } from '../components/CreateTacticModal';
 import { fetchFeaturedTactics, fetchRandomTactics } from '../lib/api';
 import type { TacticsPlaylist, Tactic } from '../types/database';
+import { HomePageSearch } from './HomePageSearch';
 
 export const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -134,7 +135,7 @@ export const Home = () => {
 
               {/* Sponsors/Stats Section */}
               <div className="pt-8 border-t border-gray-800">
-                <p className="text-sm text-gray-400 mb-4">Trusted by top football clubs</p>
+                <p className="text-sm text-gray-400 mb-4">Trusted by thousands of career mode fans!</p>
                 <div className="grid grid-cols-3 gap-8">
                   <div>
                     <h4 className="text-3xl font-bold text-white">100+</h4>
@@ -149,11 +150,14 @@ export const Home = () => {
                     <p className="text-gray-400">Daily Users</p>
                   </div>
                 </div>
+                </div>
+                <HomePageSearch />
+
               </div>
-            </div>
 
             {/* Right Column - Tactics Display */}
             <div className="relative lg:block">
+
               <div className="relative w-full max-w-[500px] mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-primary-500/5 rounded-2xl"></div>
                 
@@ -190,12 +194,14 @@ export const Home = () => {
                         Attack
                       </span>
                     </div>
+                    
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
 
       {/* Content Sections */}
