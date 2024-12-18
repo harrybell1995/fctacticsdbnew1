@@ -31,7 +31,7 @@ export interface Tactic {
   club: string;
   season: string;
   verified: boolean;
-  manager?: string;
+  manager_name?: string;
   year?: string;
   clubcountry?: string;
   league?: string;

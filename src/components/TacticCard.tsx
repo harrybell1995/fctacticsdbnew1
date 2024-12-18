@@ -116,7 +116,7 @@ export const TacticCard: React.FC<TacticCardProps> = ({
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-white/90">
                   <User size={18} />
-                  <span>Manager: {tactic.manager || 'Unknown'}</span>
+                  <span>Manager: {tactic.manager_name || 'Unknown'}</span>
                 </div>
                 <div className="flex items-center gap-2 text-white/90">
                   <Calendar size={18} />
