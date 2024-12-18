@@ -34,6 +34,29 @@ const formationMapping: Record<string, string> = {
   '1': '4-1-3-2'      // ID '1' corresponds to '4-1-3-2'
 };
 
+const goalkeeper_coords = { x: 50, y: 10 };
+const left_back_coords = { x: 20, y: 32 };
+const center_back_coords_1 = { x: 38, y: 30 };
+const center_back_coords_2 = { x: 50, y: 30 };
+const center_back_coords_3 = { x: 62, y: 30 };
+const right_back_coords = { x: 80, y: 32 };
+const defensive_mid_coords = { x: 50, y: 42 };
+const defensive_mid_coords_2 = { x: 40, y: 42 };
+const defensive_mid_coords_3 = { x: 60, y: 42 };
+const center_mid_coords_1 = { x: 50, y: 53 };
+const center_mid_coords_2 = { x: 38, y: 53 };
+const center_mid_coords_3 = { x: 62, y: 53 };
+const left_mid_coords = { x: 20, y: 55 };
+const right_mid_coords = { x: 80, y: 55 };
+const cam_coords = { x: 50, y: 60 };
+const cam_left_coords = { x: 30, y: 65 };
+const cam_right_coords = { x: 70, y: 65 };
+const left_wing_coords = { x: 30, y: 75 };
+const right_wing_coords = { x: 70, y: 75 };
+const striker_coords_1 = { x: 40, y: 75 };
+const striker_coords_2 = { x: 60, y: 75 };
+const central_striker_coords = { x: 50, y: 75 };
+
 interface FormationDisplayProps {
   formationId: string;  // The formation ID (e.g., '36')
   positionsRolesFocuses: Record<string, [string, string]>;  // Positions data
@@ -45,505 +68,472 @@ const getPositionCoordinates = (formation: string, playerNumber: number) => {
   // You can replace this logic with actual formation coordinates
   const formationCoords: Record<string, { x: number; y: number }[]> = {
     '3-1-4-2': [
-      { x: 50, y: 5 },    // GK
-      { x: 30, y: 20 },   // CB
-      { x: 50, y: 20 },   // CB
-      { x: 70, y: 20 },   // CB
-      { x: 50, y: 40 },   // CDM
-      { x: 20, y: 55 },   // LM
-      { x: 40, y: 50 },   // CM
-      { x: 60, y: 50 },   // CM
-      { x: 80, y: 55 },   // RM
-      { x: 40, y: 75 },   // ST
-      { x: 60, y: 75 },   // ST
+      goalkeeper_coords ,    // GK
+      center_back_coords_1,   // CB
+      center_back_coords_2,   // CB
+      center_back_coords_3,   // CB
+      defensive_mid_coords,   // CDM
+      left_mid_coords,   // LM
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      right_mid_coords,   // RM
+      striker_coords_1,   // ST
+      striker_coords_2,   // ST
     ],
     '3-4-1-2': [
-      { x: 50, y: 5 },    // GK
-      { x: 30, y: 20 },   // CB
-      { x: 50, y: 20 },   // CB
-      { x: 70, y: 20 },   // CB
-      { x: 20, y: 55 },   // LM
-      { x: 40, y: 50 },   // CM
-      { x: 60, y: 50 },   // CM
-      { x: 80, y: 55 },   // RM
-      { x: 50, y: 60 },   // CAM
-      { x: 40, y: 75 },   // ST
-      { x: 60, y: 75 },   // ST
+      goalkeeper_coords ,    // GK
+      center_back_coords_1,   // CB
+      center_back_coords_2,   // CB
+      center_back_coords_3,   // CB
+      left_mid_coords,   // LM
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      right_mid_coords,   // RM
+      cam_coords, // CAM
+      striker_coords_1,   // ST
+      striker_coords_2,   // ST
     ],
     '3-4-2-1': [
-      { x: 50, y: 5 },    // GK
-      { x: 30, y: 20 },   // CB
-      { x: 50, y: 20 },   // CB
-      { x: 70, y: 20 },   // CB
-      { x: 20, y: 55 },   // LM
-      { x: 40, y: 50 },   // CM
-      { x: 60, y: 50 },   // CM
-      { x: 80, y: 55 },   // RM
-      { x: 30, y: 65 },   // LCAM
-      { x: 50, y: 75 },   // ST
-      { x: 70, y: 65 },   // RCAM
+      goalkeeper_coords ,    // GK
+      center_back_coords_1,   // CB
+      center_back_coords_2,   // CB
+      center_back_coords_3,   // CB
+      left_mid_coords,   // LM
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      right_mid_coords,   // RM
+      cam_left_coords,   // LCAM
+      cam_right_coords,   // RCAM
+      central_striker_coords,   // ST
     ],
     '3-4-3': [
-      { x: 50, y: 5 },    // GK
-      { x: 30, y: 20 },   // CB
-      { x: 50, y: 20 },   // CB
-      { x: 70, y: 20 },   // CB
-      { x: 20, y: 55 },   // LM
-      { x: 40, y: 50 },   // CM
-      { x: 60, y: 50 },   // CM
-      { x: 80, y: 55 },  // RM
-      { x: 30, y: 75 },   // LW
-      { x: 50, y: 75 },   // ST
-      { x: 70, y: 75 },   // RW
+      goalkeeper_coords ,    // GK
+      center_back_coords_1,   // CB
+      center_back_coords_2,   // CB
+      center_back_coords_3,   // CB
+      left_mid_coords,   // LM
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      right_mid_coords,   // RM
+      left_wing_coords,   // LW
+      central_striker_coords,   // ST
+      right_wing_coords,   // RW
     ],
-      '3-4-3 Diamond': [
-      { x: 50, y: 5 },   // GK
-      { x: 30, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 70, y: 20 },  // CB
-      { x: 50, y: 45 },  // CDM
-      { x: 20, y: 45 },  // LM
-      { x: 80, y: 55 },  // RM
-      { x: 50, y: 60 },  // CAM
-      { x: 30, y: 75 },  // LW
-      { x: 50, y: 70 },  // ST
-      { x: 70, y: 75 },  // RW
+    '3-4-3 Diamond': [
+      goalkeeper_coords ,    // GK
+      center_back_coords_2,   // CB
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      defensive_mid_coords,   // CDM
+      left_mid_coords,   // LM
+      right_mid_coords,   // RM
+      cam_coords, // CAM
+      left_wing_coords,   // LW
+      central_striker_coords,   // ST
+      right_wing_coords,   // RW
     ],
     '3-4-3 Flat': [
-      { x: 50, y: 5 },   // GK
-      { x: 30, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 70, y: 20 },  // CB
-      { x: 20, y: 45 },  // LM
-      { x: 40, y: 45 },  // CM
-      { x: 60, y: 45 },  // CM
-      { x: 80, y: 55 },  // RM
-      { x: 30, y: 75 },  // LW
-      { x: 50, y: 70 },  // ST
-      { x: 70, y: 75 },  // RW
+      goalkeeper_coords ,    // GK
+      center_back_coords_1,   // CB
+      center_back_coords_2,   // CB
+      center_back_coords_3,   // CB
+      left_mid_coords,   // LM
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      right_mid_coords,   // RM
+      left_wing_coords,   // LW
+      central_striker_coords,   // ST
+      right_wing_coords,   // RW
     ],
     '3-5-1-1': [
-      { x: 50, y: 5 },   // GK
-      { x: 30, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 70, y: 20 },  // CB
-      { x: 20, y: 45 },  // LM
-      { x: 40, y: 45 },  // CM
-      { x: 50, y: 45 },  // CM
-      { x: 60, y: 45 },  // CM
-      { x: 80, y: 55 },  // RM
-      { x: 50, y: 60 },  // CAM
-      { x: 50, y: 70 },  // ST
+      goalkeeper_coords ,    // GK
+      center_back_coords_1,   // CB
+      center_back_coords_2,   // CB
+      center_back_coords_3,   // CB
+      left_mid_coords,   // LM
+      center_mid_coords_2,   // CM
+      center_mid_coords_1,   // CM
+      center_mid_coords_3,   // CM
+      right_mid_coords,   // RM
+      cam_coords, // CAM
+      central_striker_coords,   // ST
     ],
     '3-5-2': [
-      { x: 50, y: 5 },   // GK
-      { x: 30, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 70, y: 20 },  // CB
-      { x: 20, y: 45 },  // LM
-      { x: 40, y: 45 },  // CM
-      { x: 50, y: 45 },  // CM
-      { x: 60, y: 45 },  // CM
-      { x: 80, y: 55 },  // RM
-      { x: 40, y: 60 },  // ST
-      { x: 60, y: 60 },  // ST
+      goalkeeper_coords ,    // GK
+      center_back_coords_1,   // CB
+      center_back_coords_2,   // CB
+      center_back_coords_3,   // CB
+      left_mid_coords,   // LM
+      center_mid_coords_2,   // CM
+      center_mid_coords_1,   // CM
+      center_mid_coords_3,   // CM
+      right_mid_coords,   // RM
+      striker_coords_1,   // ST
+      striker_coords_2,   // ST
     ],
     '4-1-2-1-2': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 50, y: 45 },  // CDM
-      { x: 30, y: 45 },  // LM
-      { x: 80, y: 55 },  // RM
-      { x: 50, y: 60 },  // CAM
-      { x: 40, y: 75 },  // ST
-      { x: 60, y: 75 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      defensive_mid_coords,   // CDM
+      left_mid_coords,   // LM
+      right_mid_coords,   // RM
+      cam_coords, // CAM
+      striker_coords_1,   // ST
+      striker_coords_2,   // ST
     ],
     '4-1-2-1-2 (2)': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 50, y: 45 },  // CDM
-      { x: 35, y: 45 },  // CM
-      { x: 65, y: 45 },  // CM
-      { x: 50, y: 60 },  // CAM
-      { x: 50, y: 75 },  // ST
-      { x: 50, y: 75 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      defensive_mid_coords,   // CDM
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      cam_coords, // CAM
+      striker_coords_1,   // ST
+      striker_coords_2,   // ST
     ],
     '4-1-3-2': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 50, y: 45 },  // CDM
-      { x: 30, y: 55 },  // LM
-      { x: 50, y: 45 },  // CM
-      { x: 80, y: 55 },  // RM
-      { x: 40, y: 75 },  // ST
-      { x: 60, y: 75 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      defensive_mid_coords,   // CDM
+      left_mid_coords,   // LM
+      center_mid_coords_1,   // CM
+      right_mid_coords,   // RM
+      striker_coords_1,   // ST
+      striker_coords_2,   // ST
     ],
     '4-1-4-1': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 50, y: 45 },  // CCM
-      { x: 20, y: 60 },  // LM
-      { x: 40, y: 55 },  // CM
-      { x: 60, y: 55 },  // CM
-      { x: 80, y: 55 },  // RM
-      { x: 50, y: 75 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      defensive_mid_coords,   // CDM
+      left_mid_coords,   // LM
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      right_mid_coords,   // RM
+      central_striker_coords,   // ST
     ],
     '4-2-1-3': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 35, y: 45 },  // CDM
-      { x: 65, y: 45 },  // CDM
-      { x: 75, y: 45 },  // CAM
-      { x: 25, y: 70 },  // LW
-      { x: 50, y: 70 },  // ST
-      { x: 75, y: 70 },  // RW
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      defensive_mid_coords_2,  // CDM
+      defensive_mid_coords_3,  // CDM
+      cam_coords, // CAM
+      left_wing_coords,   // LW
+      central_striker_coords,   // ST
+      right_wing_coords,   // RW
     ],
     '4-2-2-2': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 35, y: 45 },  // CDM
-      { x: 65, y: 45 },  // CDM
-      { x: 75, y: 45 },  // CAM
-      { x: 75, y: 45 },  // CAM
-      { x: 50, y: 70 },  // ST
-      { x: 50, y: 70 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      defensive_mid_coords_2,  // CDM
+      defensive_mid_coords_3,  // CDM
+      cam_left_coords,   // LCAM
+      cam_right_coords,   // RCAM
+      striker_coords_1,   // ST
+      striker_coords_2,   // ST
     ],
     '4-2-3-1': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 40, y: 45 },  // CDM
-      { x: 60, y: 45 },  // CDM
-      { x: 75, y: 55 },  // CAM
-      { x: 50, y: 55 },  // CAM
-      { x: 25, y: 55 },  // CAM
-      { x: 50, y: 70 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      defensive_mid_coords_2,  // CDM
+      defensive_mid_coords_3,  // CDM
+      cam_left_coords,   // LCAM
+      cam_coords, // CAM
+      cam_right_coords,   // RCAM
+      central_striker_coords,   // ST
     ],
     '4-2-3-1 (2)': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 32 },  // LB
-      { x: 40, y: 30 },  // CB
-      { x: 60, y: 30 },  // CB
-      { x: 75, y: 32 },  // RB
-      { x: 40, y: 45 },  // CDM
-      { x: 60, y: 45 },  // CDM
-      { x: 75, y: 58 },  // CAM
-      { x: 50, y: 55 },  // CAM
-      { x: 25, y: 58},  // CAM
-      { x: 50, y: 70 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      defensive_mid_coords_2,  // CDM
+      defensive_mid_coords_3,  // CDM
+      left_mid_coords,   // LM
+      cam_coords, // CAM
+      right_mid_coords,   // RM
+      central_striker_coords,   // ST
     ],
     '4-2-4': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 25, y: 45 },  // CM
-      { x: 50, y: 55 },  // CM
-      { x: 75, y: 45 },  // LW
-      { x: 50, y: 70 },  // ST
-      { x: 50, y: 70 },  // ST
-      { x: 75, y: 45 },  // RW
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      left_wing_coords,   // LW
+      striker_coords_1,   // ST
+      striker_coords_2,   // ST
+      right_wing_coords,   // RW
     ],
     '4-3-1-2': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 25, y: 45 },  // CM
-      { x: 25, y: 45 },  // CM
-      { x: 25, y: 45 },  // CM
-      { x: 50, y: 55 },  // CAM
-      { x: 50, y: 70 },  // ST
-      { x: 50, y: 70 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      center_mid_coords_2,   // CM
+      center_mid_coords_1,   // CM
+      center_mid_coords_3,   // CM
+      cam_coords, // CAM
+      striker_coords_1,   // ST
+      striker_coords_2,   // ST
     ],
     '4-3-2-1': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 25, y: 45 },  // CM
-      { x: 25, y: 45 },  // CM
-      { x: 25, y: 45 },  // CM
-      { x: 50, y: 55 },  // CAM
-      { x: 50, y: 55 },  // CAM
-      { x: 50, y: 70 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      center_mid_coords_2,   // CM
+      center_mid_coords_1,   // CM
+      center_mid_coords_3,   // CM
+      cam_left_coords,   // LCAM
+      cam_right_coords,   // RCAM
+      central_striker_coords,   // ST
     ],
     '4-3-3': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 25, y: 45 },  // CM
-      { x: 50, y: 45 },  // CM
-      { x: 75, y: 45 },  // CM
-      { x: 25, y: 70 },  // LW
-      { x: 50, y: 70 },  // ST
-      { x: 75, y: 70 },  // RW
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      center_mid_coords_2,   // CM
+      center_mid_coords_1,   // CM
+      center_mid_coords_3,   // CM
+      left_wing_coords,   // LW
+      central_striker_coords,   // ST
+      right_wing_coords,   // RW
     ],
     '4-3-3 (2)': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 50, y: 45 },  // CDM
-      { x: 50, y: 45 },  // CM
-      { x: 75, y: 45 },  // CM
-      { x: 25, y: 70 },  // LW
-      { x: 50, y: 70 },  // ST
-      { x: 75, y: 70 },  // RW
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      defensive_mid_coords,
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      left_wing_coords,   // LW
+      central_striker_coords,   // ST
+      right_wing_coords,   // RW
     ],
     '4-3-3 (3)': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 35, y: 45 },  // CDM
-      { x: 65, y: 45 },  // CDM
-      { x: 75, y: 45 },  // CM
-      { x: 25, y: 70 },  // LW
-      { x: 50, y: 70 },  // ST
-      { x: 75, y: 70 },  // RW
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      defensive_mid_coords_2,  // CDM
+      defensive_mid_coords_3,  // CDM
+      center_mid_coords_1,   // CM
+      left_wing_coords,   // LW
+      central_striker_coords,   // ST
+      right_wing_coords,   // RW
     ],
     '4-3-3 (4)': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 25, y: 45 },  // CM
-      { x: 50, y: 45 },  // CM
-      { x: 75, y: 45 },  // CAM
-      { x: 25, y: 70 },  // LW
-      { x: 50, y: 70 },  // ST
-      { x: 75, y: 70 },  // RW
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      cam_coords, // CAM
+      left_wing_coords,   // LW
+      central_striker_coords,   // ST
+      right_wing_coords,   // RW
     ],
     '4-4-1-1': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 20, y: 55 },  // LM
-      { x: 40, y: 50 },  // CM
-      { x: 60, y: 50 },  // CM
-      { x: 80, y: 55 },  // RM
-      { x: 50, y: 65 },  // CAM
-      { x: 50, y: 75 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      left_mid_coords,   // LM
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      right_mid_coords,   // RM
+      cam_coords, // CAM
+      central_striker_coords,   // ST
     ],
     '4-4-1-1 (2)': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 35, y: 45 },  // CDM
-      { x: 65, y: 45 },  // CDM
-      { x: 25, y: 45 },  // LM
-      { x: 80, y: 55 },  // RM
-      { x: 50, y: 70 },  // CAM
-      { x: 75, y: 70 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      defensive_mid_coords_2,  // CDM
+      defensive_mid_coords_3,  // CDM
+      left_mid_coords,   // LM
+      right_mid_coords,   // RM
+      cam_coords, // CAM
+      central_striker_coords,   // ST
     ],
     '4-4-2': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 20, y: 55 },  // LM
-      { x: 40, y: 50 },  // CM
-      { x: 60, y: 50 },  // CM
-      { x: 80, y: 55 },  // RM
-      { x: 40, y: 75 },  // ST
-      { x: 60, y: 75 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      left_mid_coords,   // LM
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      right_mid_coords,   // RM
+      striker_coords_1,   // ST
+      striker_coords_2,   // ST
     ],
     '4-4-2 (2)': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 50, y: 45 },  // CDM
-      { x: 50, y: 45 },  // CDM
-      { x: 20, y: 55 },  // LM
-      { x: 80, y: 55 },  // RM
-      { x: 40, y: 75 },  // ST
-      { x: 60, y: 75 },  // ST
-    ], //where i've left correcting 06.12
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      defensive_mid_coords_2,  // CDM
+      defensive_mid_coords_3,  // CDM
+      left_mid_coords,   // LM
+      right_mid_coords,   // RM
+      striker_coords_1,   // ST
+      striker_coords_2,   // ST
+    ], 
     '4-5-1': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 20, y: 55 },  // LM
-      { x: 50, y: 50 },  // CM
-      { x: 80, y: 55 },  // RM
-      { x: 60, y: 70 },  // CAM
-      { x: 80, y: 70 },  // CAM
-      { x: 75, y: 75 },  // RW
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      left_mid_coords,   // LM
+      center_mid_coords_1,   // CM
+      right_mid_coords,   // RM
+      cam_left_coords,   // LCAM
+      cam_right_coords,   // RCAM
+      central_striker_coords,   // ST
     ],
     '4-5-1 (2)': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 20, y: 55 },  // LM
-      { x: 35, y: 50 },  // CM
-      { x: 50, y: 50 },  // CM
-      { x: 65, y: 50 },  // CM
-      { x: 80, y: 55 },  // RM
-      { x: 50, y: 75 },  // ST
-    ],
-    '4-5-1 Attack': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 50, y: 45 },  // CM
-      { x: 50, y: 70 },  // CAM
-      { x: 25, y: 75 },  // LW
-      { x: 75, y: 75 },  // RW
-    ],
-    '4-5-1 Flat': [
-      { x: 50, y: 10 },   // GK
-      { x: 20, y: 35 },  // LB
-      { x: 40, y: 35 },  // CB
-      { x: 60, y: 35 },  // CB
-      { x: 80, y: 35 },  // RB
-      { x: 50, y: 45 },  // CM
-      { x: 50, y: 70 },  // CAM
-      { x: 25, y: 75 },  // LW
-      { x: 75, y: 75 },  // RW
-    ],
-    '5-1-2-2': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 40, y: 50 },  // CM
-      { x: 60, y: 50 },  // CM
-      { x: 50, y: 70 },  // CAM
-      { x: 25, y: 75 },  // LW
-      { x: 75, y: 75 },  // RW
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      left_mid_coords,   // LM
+      center_mid_coords_2,   // CM
+      center_mid_coords_1,   // CM
+      center_mid_coords_3,   // CM
+      right_mid_coords,   // RM
+      central_striker_coords,   // ST
     ],
     '5-2-1-2': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 40, y: 50 },  // CM
-      { x: 60, y: 50 },  // CM
-      { x: 50, y: 70 },  // CAM
-      { x: 40, y: 75 },  // ST
-      { x: 60, y: 75 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_2,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      cam_coords, // CAM
+      striker_coords_1,   // ST
+      striker_coords_2,   // ST
     ],
     '5-2-2-1': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 40, y: 50 },  // CM
-      { x: 60, y: 50 },  // CM
-      { x: 50, y: 70 },  // CAM
-      { x: 40, y: 75 },  // ST
-      { x: 60, y: 75 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_2,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      cam_left_coords,   // LCAM
+      cam_right_coords,   // RCAM
+      central_striker_coords,   // ST
     ],
     '5-2-3': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 40, y: 45 },  // CM
-      { x: 60, y: 45 },  // CM
-      { x: 25, y: 75 },  // LW
-      { x: 50, y: 75 },  // ST
-      { x: 60, y: 75 },  // ST
-
-      { x: 75, y: 75 },  // RW
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_2,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      left_wing_coords,   // LW
+      central_striker_coords,   // ST
+      right_wing_coords,   // RW
     ],
     '5-3-2': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 40, y: 45 },  // CM
-      { x: 50, y: 45 },  // CM
-      { x: 60, y: 45 },  // CM
-      { x: 40, y: 75 },  // ST
-      { x: 60, y: 75 },  // ST
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_2,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      defensive_mid_coords,
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      striker_coords_1,   // ST
+      striker_coords_2,   // ST
     ],
     '5-4-1': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 50, y: 45 },  // CM
-      { x: 50, y: 70 },  // CAM
-      { x: 25, y: 75 },  // LW
-      { x: 75, y: 75 },  // RW
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_2,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      left_mid_coords,   // LM
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      right_mid_coords,   // RM
+      central_striker_coords,   // ST
     ],
     '5-4-1 Diamond': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 50, y: 45 },  // CM
-      { x: 50, y: 70 },  // CAM
-      { x: 25, y: 75 },  // LW
-      { x: 75, y: 75 },  // RW
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_2,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      defensive_mid_coords,      
+      left_mid_coords,   // LM
+      right_mid_coords,   // RM
+      cam_coords, // CAM
+      central_striker_coords,   // ST
     ],
     '5-4-1 Flat': [
-      { x: 50, y: 5 },   // GK
-      { x: 25, y: 20 },  // LB
-      { x: 40, y: 20 },  // CB
-      { x: 50, y: 20 },  // CB
-      { x: 60, y: 20 },  // CB
-      { x: 75, y: 20 },  // RB
-      { x: 50, y: 45 },  // CM
-      { x: 50, y: 70 },  // CAM
-      { x: 25, y: 75 },  // LW
-      { x: 75, y: 75 },  // RW
+      goalkeeper_coords ,    // GK
+      left_back_coords,
+      center_back_coords_1,   // CB
+      center_back_coords_2,   // CB
+      center_back_coords_3,   // CB
+      right_back_coords,
+      left_mid_coords,   // LM
+      center_mid_coords_2,   // CM
+      center_mid_coords_3,   // CM
+      right_mid_coords,   // RM
+      central_striker_coords,   // ST
     ]
   // You can add more formations here
   };
