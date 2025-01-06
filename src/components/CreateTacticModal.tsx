@@ -36,6 +36,14 @@ interface Props {
   onClose: () => void;
 }
 
+function isValidFormationId(formationId: number): boolean {
+  const validFormationIds = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 
+    17, 18, 20, 21, 22, 23, 24, 25, 27, 29, 30, 31, 33, 36
+  ];
+  return validFormationIds.includes(formationId);
+}
+
 // Constants for dropdown options
 const BUILDUP_STYLES = ['Balanced', 'Counter', 'Short Passing'];
 const DEFENSIVE_APPROACHES = ['Deep', 'Normal', 'High', 'Aggressive'];
@@ -143,28 +151,39 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
     if (code.length === 11) {
       try {
         const decoded = decodeShareCode(code);
-        if (decoded) {
-          const formationId = decoded.formation;
-          const positions = getFormationPositions(decoded.formation);
-          
-          const positionsRolesFocuses: Record<string, [string, string]> = {};
-          decoded.instructions.forEach((instruction, index) => {
-            const position = positions[index];
-            const roleName = decodePlayerRole(instruction, position);
-            const [role, focus] = roleName.split(' - ');
-            positionsRolesFocuses[`Player ${index + 1}`] = [role, focus || 'Balanced'];
-          });
-
-          setDecodedTactic({
-            formation: formationId,
-            buildup: decoded.buildup,
-            defensive: decoded.defensive,
-            positionsRolesFocuses
-          });
-          setError('');
+        if (!decoded) {
+          setError('Invalid share code format');
+          setDecodedTactic(null);
+          return;
         }
+  
+        // Check if the formation ID is valid
+        if (!isValidFormationId(decoded.formation)) {
+          setError('Invalid formation in share code. Please confirm the code is correct.');
+          setDecodedTactic(null);
+          return;
+        }
+  
+        const formationId = decoded.formation;
+        const positions = getFormationPositions(decoded.formation);
+        
+        const positionsRolesFocuses: Record<string, [string, string]> = {};
+        decoded.instructions.forEach((instruction, index) => {
+          const position = positions[index];
+          const roleName = decodePlayerRole(instruction, position);
+          const [role, focus] = roleName.split(' - ');
+          positionsRolesFocuses[`Player ${index + 1}`] = [role, focus || 'Balanced'];
+        });
+  
+        setDecodedTactic({
+          formation: formationId,
+          buildup: decoded.buildup,
+          defensive: decoded.defensive,
+          positionsRolesFocuses
+        });
+        setError('');
       } catch (err) {
-        setError('Invalid share code');
+        setError('Invalid share code. Please confirm it is correct.');
         setDecodedTactic(null);
       }
     } else {
@@ -172,7 +191,7 @@ export const CreateTacticModal: React.FC<Props> = ({ isOpen, onClose }) => {
       setError('');
     }
   };
-
+  
   // Handle club input and suggestions
   const handleClubChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
