@@ -221,7 +221,7 @@ export const Home = () => {
           </section>
 
           {/* Random Tactics */}
-          <section>
+          {/* <section>
             <div className="flex items-center gap-2 mb-6">
               <TrendingUp className="text-primary-500" size={24} />
               <h2 className="text-2xl font-bold">Discover Tactics</h2>
@@ -240,7 +240,7 @@ export const Home = () => {
                 />
               ))}
             </div>
-          </section>
+          </section> */}
         </div>
       </div>
 

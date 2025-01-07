@@ -1,50 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search as SearchIcon, Loader } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import type { TacticsPlaylist, Tactic } from '../types/database';
 import { PlaylistCard } from '../components/PlaylistCard';
 import { TacticCard } from '../components/TacticCard';
+import { useLocation } from 'react-router-dom';
 
 export const Search = () => {
   const navigate = useNavigate();
-  const [query, setQuery] = useState('');
+  const location = useLocation();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const queryParam = new URLSearchParams(location.search).get('query') || '';
+
+  const [query, setQuery] = useState(queryParam);
   const [playlists, setPlaylists] = useState<TacticsPlaylist[]>([]);
   const [tactics, setTactics] = useState<Tactic[]>([]);
   const [loading, setLoading] = useState(false);
   const [expandedTacticId, setExpandedTacticId] = useState<string | null>(null);
 
   useEffect(() => {
+    // Focus the input field whenever the location changes
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [location]);
+  useEffect(() => {
+    // Automatically perform a search when query changes
     const searchItems = async () => {
       if (!query.trim()) {
         setPlaylists([]);
         setTactics([]);
         return;
-      }
-
+      }   
       setLoading(true);
       try {
-        // Search in tacticsPlaylists
-        const { data: playlistData, error: playlistError } = await supabase
+        const { data: playlistData } = await supabase
           .from('tacticsPlaylists')
           .select('*')
           .or(`title.ilike.%${query}%,description.ilike.%${query}%`)
           .limit(5);
 
-        if (playlistError) {
-          console.error('Playlist search error:', playlistError);
-        }
-
-        // Search in tacticsTable
-        const { data: tacticsData, error: tacticsError } = await supabase
+        const { data: tacticsData } = await supabase
           .from('tacticsTable')
           .select('*')
-          .or(`tactic_name.ilike.%${query}%,description.ilike.%${query}%,club.ilike.%${query}%`)
-          .limit(10);
-
-        if (tacticsError) {
-          console.error('Tactic search error:', tacticsError);
-        }
+          .or(`tactic_name.ilike.%${query}%,description.ilike.%${query}%`);
 
         setPlaylists(playlistData || []);
         setTactics(tacticsData || []);
@@ -59,6 +59,15 @@ export const Search = () => {
     return () => clearTimeout(debounce);
   }, [query]);
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setQuery(value);
+
+    // Update the URL with the new query
+    navigate(`/search?query=${encodeURIComponent(value.trim())}`);
+  };
+
+
   const handleTagClick = (tag: string) => {
     setQuery(tag);
   };
@@ -68,10 +77,11 @@ export const Search = () => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="relative mb-8">
           <input
+            ref={inputRef}
             type="text"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search tactics, teams, managers, or tags..."
+            onChange={handleInputChange}
+            placeholder="Search tactics, teams, or managers..."
             className="w-full bg-white/10 border border-white/20 rounded-lg px-12 py-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
           />
           <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
