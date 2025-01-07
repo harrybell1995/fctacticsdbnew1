@@ -2,18 +2,17 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import Sitemap from 'vite-plugin-sitemap';
 
-// Generate dynamic routes for Playlists, Decades, Styles, and Tactics
-const playlistIds = Array.from({ length: 13 }, (_, i) => i + 1); // IDs 1 to 13
-const decades = ['2020s', '2010s', '2000s', '1990s', '1980s', '1970s', '1960s']; // Decades 2020s to 1960s
-const styles = ['counter-attack', 'defensive', 'high-press', 'possession-based']; // 4 playing styles
-const tacticIds = Array.from({ length: 33 }, (_, i) => i + 56); // Tactics IDs 56 to 88
+// Your existing dynamic routes setup remains the same
+const playlistIds = Array.from({ length: 13 }, (_, i) => i + 1);
+const decades = ['2020s', '2010s', '2000s', '1990s', '1980s', '1970s', '1960s'];
+const styles = ['counter-attack', 'defensive', 'high-press', 'possession-based'];
+const tacticIds = Array.from({ length: 33 }, (_, i) => i + 56);
 
-// Combine all dynamic routes
 const dynamicRoutes = [
-  ...playlistIds.map(id => `/playlist/${id}`),       // Playlists
-  ...decades.map(decade => `/decade/${decade}`),     // Decades
-  ...styles.map(style => `/style/${style}`),         // Playing styles
-  ...tacticIds.map(id => `/tactic/${id}`),           // Tactics
+  ...playlistIds.map(id => `/playlist/${id}`),
+  ...decades.map(decade => `/decade/${decade}`),
+  ...styles.map(style => `/style/${style}`),
+  ...tacticIds.map(id => `/tactic/${id}`)
 ];
 
 export default defineConfig({
@@ -21,10 +20,17 @@ export default defineConfig({
     react(),
     Sitemap({
       hostname: 'https://www.fctacticdb.com',
-      dynamicRoutes,            // Include dynamic routes
-      outDir: 'dist',           // Output directory for sitemap
-      changefreq: 'daily',      // Change frequency
-      priority: 0.7,            // Priority of the pages
+      dynamicRoutes,
+      outDir: 'dist',
+      changefreq: 'daily',
+      priority: 0.7,
     }),
   ],
+  // This is the correct way to configure client-side routing in Vite
+  server: {
+    middlewareMode: false,
+    fs: {
+      strict: true
+    }
+  }
 });
