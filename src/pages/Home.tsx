@@ -114,8 +114,13 @@ export const Home = () => {
               </h1>
               
               <p className="text-lg text-gray-300 max-w-xl">
-                Explore an extensive collection of tactical analyses, formations, and strategies 
+                Explore an extensive collection of tactical analyses, formations and strategies 
                 from legendary managers throughout football history.
+              </p>
+
+              <p className="text-lg text-gray-300 max-w-xl">
+                Search for the manager, club or league that you're interested in, or try one of 
+                the curated tactic groups below.
               </p>
 
               <div className="flex flex-wrap gap-4">
@@ -156,7 +161,7 @@ export const Home = () => {
               </div>
 
             {/* Right Column - Tactics Display */}
-            <div className="relative lg:block">
+            <div className="relative hidden lg:block">
 
               <div className="relative w-full max-w-[500px] mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-primary-500/5 rounded-2xl"></div>
