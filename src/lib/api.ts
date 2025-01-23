@@ -122,18 +122,21 @@ export async function fetchTacticsByPlaylistId(playlistId: string): Promise<Tact
   return processedTactics;
 }
 
-export async function fetchRandomTactics(limit: number = 4): Promise<Tactic[]> {
+export async function fetchRandomTactics(): Promise<TacticsPlaylist[]> {
   const { data, error } = await supabase
-    .from('tacticsTable')
+    .from('tacticsPlaylists')
     .select('*')
-    .limit(limit);
+    .limit(64);
 
   if (error) {
-    console.error('Error fetching random tactics:', error);
+    console.error('Error fetching featured tactics:', error);
     return [];
   }
 
-  return shuffleArray(data || []);
+  return shuffleArray(data || []).map(playlist => ({
+    ...playlist,
+    tags: Array.isArray(playlist.tags) ? playlist.tags : []
+  }));
 }
 
 export async function fetchFeaturedTactics(): Promise<TacticsPlaylist[]> {

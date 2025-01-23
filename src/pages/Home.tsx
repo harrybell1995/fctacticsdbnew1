@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { ClipboardList, TrendingUp, Clock, Star } from 'lucide-react';
+import PaginatedTactics from "../components/PaginatedTactics"
 import { PlaylistCard } from '../components/PlaylistCard';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { FormationDisplay } from '../components/FormationDisplay';
@@ -12,7 +13,7 @@ export const Home = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [featuredTactics, setFeaturedTactics] = useState<TacticsPlaylist[]>([]);
-  const [randomTactics, setRandomTactics] = useState<Tactic[]>([]);
+  const [randomTactics, setRandomTactics] = useState<TacticsPlaylist[]>([]);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const featuredSectionRef = useRef<HTMLElement>(null);
 
@@ -122,6 +123,7 @@ export const Home = () => {
                 Search for the manager, club or league that you're interested in, or try one of 
                 the curated tactic groups below.
               </p>
+              <HomePageSearch />
 
               <div className="flex flex-wrap gap-4">
                 <button 
@@ -156,7 +158,6 @@ export const Home = () => {
                   </div>
                 </div>
                 </div>
-                <HomePageSearch />
 
               </div>
 
@@ -225,27 +226,19 @@ export const Home = () => {
             </div>
           </section>
 
-          {/* Random Tactics */}
-          {/* <section>
+          <section>
             <div className="flex items-center gap-2 mb-6">
               <TrendingUp className="text-primary-500" size={24} />
               <h2 className="text-2xl font-bold">Discover Tactics</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {randomTactics.map((tactic) => (
-                <PlaylistCard 
-                  key={tactic.id} 
-                  playlist={{
-                    id: tactic.id,
-                    title: tactic.tactic_name,
-                    description: tactic.description,
-                    tags: tactic.tags,
-                    created_at: tactic.created_at
-                  }} 
-                />
-              ))}
-            </div>
-          </section> */}
+
+            {randomTactics.length > 0 ? (
+              <PaginatedTactics playlists={randomTactics} itemsPerPage={12} />
+            ) : (
+              <p className="text-gray-500">No tactics available.</p>
+            )}
+          </section>
+
         </div>
       </div>
 
