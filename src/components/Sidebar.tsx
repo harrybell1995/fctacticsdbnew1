@@ -84,8 +84,8 @@ export const Sidebar = () => {
             onClick={() => setIsCreateModalOpen(true)}
             className="flex items-center gap-4 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors w-full"
           >
-            <PlusCircle size={24} />
-            <span className="font-semibold">Create Tactic</span>
+            <Share2 size={24} />
+            <span className="font-semibold">Share Tactic</span>
           </button>
           
           <div className="mt-4">
