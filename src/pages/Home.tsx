@@ -103,17 +103,27 @@ export const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Text Content */}
             <div className="space-y-8">
-              <div className="inline-block px-4 py-2 bg-primary-500/10 rounded-full">
-                <p className="text-primary-400 text-sm font-medium">
-                  Revolutionizing Football Analysis
-                </p>
-              </div>
               
               <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight">
                 The Ultimate Platform for
                 <span className="bg-gradient-to-r from-green-300 to-green-500 text-transparent bg-clip-text"> Football Tactics</span>
               </h1>
-              
+              <div className="inline-block px-4 py-2 bg-primary-500/10 rounded-full">
+              <p className="text-primary-400 text-sm font-medium">
+                  Realistic Tactics!
+                </p>
+              </div>
+              <div className="inline-block px-4 py-2 bg-primary-500/10 rounded-full">
+              <p className="text-primary-400 text-sm font-medium">
+                  New Ideas!
+                </p>
+              </div>
+              <div className="inline-block px-4 py-2 bg-primary-500/10 rounded-full">
+              <p className="text-primary-400 text-sm font-medium">
+                  Better Gameplay!
+                </p>
+              </div>
+
               <p className="text-lg text-gray-300 max-w-xl">
                 Explore an extensive collection of tactical analyses, formations and strategies 
                 from legendary managers throughout football history.
@@ -176,9 +186,6 @@ export const Home = () => {
                   
                   {/* Formation Display */}
                   <div className="aspect-[3/4]">
-                    {/* Log the formation ID */}
-                    {console.log(heroTactic.formation)}
-                    
                     {/* Pass the formationId and other props to FormationDisplay */}
                     <FormationDisplay
                       formationId={heroTactic.formation}
@@ -189,15 +196,18 @@ export const Home = () => {
                   {/* Formation Details */}
                   <div className="mt-4 flex justify-between items-center">
                     <div>
-                      <p className="text-sm text-gray-400">Formation</p>
-                      <p className="text-lg font-semibold text-white">{heroTactic.formation}</p>
+                      <p className="text-sm text-gray-400">Sharecode</p>
+                      <p className="text-lg font-semibold text-white">X4wdyf3dhT3</p>
                     </div>
                     <div className="flex gap-2">
                       <span className="px-3 py-1 bg-primary-500/20 rounded-full text-primary-400 text-sm">
-                        Possession
+                        Wide Play
                       </span>
                       <span className="px-3 py-1 bg-primary-500/20 rounded-full text-primary-400 text-sm">
-                        Attack
+                        Direct Play
+                      </span>
+                      <span className="px-3 py-1 bg-primary-500/20 rounded-full text-primary-400 text-sm">
+                        Alex Ferguson
                       </span>
                     </div>
                     

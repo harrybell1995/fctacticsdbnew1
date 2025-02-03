@@ -31,7 +31,7 @@ const PaginatedPlaylists: React.FC<Props> = ({ playlists, itemsPerPage }) => {
       {/* Pagination Controls */}
       <div className="flex justify-center items-center gap-4 mt-6">
         <button
-          className="px-4 py-2 bg-green-200 rounded hover:bg-gray-300 disabled:opacity-50"
+          className="px-4 py-2 bg-grey-200 rounded hover:bg-gray-300 disabled:opacity-50"
           disabled={currentPage === 1}
           onClick={() => goToPage(currentPage - 1)}
         >
@@ -44,7 +44,7 @@ const PaginatedPlaylists: React.FC<Props> = ({ playlists, itemsPerPage }) => {
             className={`px-4 py-2 rounded ${
               currentPage === index + 1
                 ? "bg-primary-500 text-white"
-                : "bg-green-200 hover:bg-green-300"
+                : "bg-grey-500 hover:bg-green-300"
             }`}
             onClick={() => goToPage(index + 1)}
           >
@@ -53,7 +53,7 @@ const PaginatedPlaylists: React.FC<Props> = ({ playlists, itemsPerPage }) => {
         ))}
 
         <button
-          className="px-4 py-2 bg-green-200 rounded hover:bg-gray-300 disabled:opacity-50"
+          className="px-4 py-2 bg-grey-200 rounded hover:bg-gray-300 disabled:opacity-50"
           disabled={currentPage === totalPages}
           onClick={() => goToPage(currentPage + 1)}
         >

@@ -14,6 +14,7 @@ import { Contact } from '../pages/Contact';
 import { About } from '../pages/About';
 import { ShareCode } from '../pages/ShareCode';
 import { Advertise } from '../pages/Advertise';
+import { TacticDetailPage } from '../pages/tactics/TacticDetailPage';
 
 export const AppRoutes = () => {
   return (
@@ -32,7 +33,8 @@ export const AppRoutes = () => {
         <Route path="about" element={<About />} />
         <Route path="share" element={<ShareCode />} />
         <Route path="advertise" element={<Advertise />} />
-      </Route>
+        <Route path="tactics/:id" element={<TacticDetailPage />} />
+        </Route>
     </Routes>
   );
 };

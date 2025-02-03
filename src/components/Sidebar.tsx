@@ -55,7 +55,7 @@ export const Sidebar = () => {
         <div className="flex items-center justify-between">
           <Link to="/" className="text-xl font-bold">Tactics Library</Link>
           <div className="hidden md:block">
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
           </div>
         </div>
 
