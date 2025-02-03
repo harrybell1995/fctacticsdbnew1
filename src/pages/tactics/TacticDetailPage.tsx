@@ -11,11 +11,6 @@ export const TacticDetailPage = () => {
  const [tactic, setTactic] = useState<Tactic | null>(null);
  const [loading, setLoading] = useState(true);
 
- <Helmet>
-   <title>{tactic ? tactic.tactic_name + " - Best FC25 Tactic" : "Loading..."}</title>
-   <meta name="description" content={tactic ? tactic.description : "Explore top FC25 tactics with detailed insights."} />
-   <meta name="keywords" content="FC25, tactics, best formations, meta tactics" />
- </Helmet>
  
  useEffect(() => {
    const fetchTactic = async () => {
@@ -46,8 +41,14 @@ export const TacticDetailPage = () => {
  );
 
  if (!tactic) return <div>Tactic not found</div>;
+ <Helmet>
+   <title>{tactic ? tactic.tactic_name + " - Best FC25 Tactic" : "Loading..."}</title>
+   <meta name="description" content={tactic ? tactic.description : "Explore top FC25 tactics with detailed insights."} />
+   <meta name="keywords" content="FC25, tactics, best formations, meta tactics" />
+ </Helmet>
 
  return (
+    
    <div className="flex-1 bg-gradient-to-b from-gray-900 to-black overflow-auto pt-16 md:pt-0">
      <div className="p-4 md:p-8 max-w-4xl mx-auto">
        <TacticCard 

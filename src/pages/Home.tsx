@@ -155,8 +155,8 @@ export const Home = () => {
                 <p className="text-sm text-gray-400 mb-4">Trusted by thousands of career mode fans!</p>
                 <div className="grid grid-cols-3 gap-8">
                   <div>
-                    <h4 className="text-3xl font-bold text-white">100+</h4>
-                    <p className="text-gray-400">Tactics</p>
+                    <h4 className="text-3xl font-bold text-white">200+</h4>
+                    <p className="text-gray-400">Realistic Tactics</p>
                   </div>
                   <div>
                     <h4 className="text-3xl font-bold text-white">50+</h4>
